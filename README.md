@@ -1,6 +1,6 @@
 # Introduction
 
-The Goal of this project is to view latest new and mark your favorites articles
+The goal of this project is to view latest new and mark your favorites articles
 
 ## Features
 - View Latest news 
