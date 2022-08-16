@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %} {% block title %} Home Page {% endblock %} {% load static %} {%block content %}
+
+<div class="container">
+    <br><br>
+    <div class="mb-2 d-flex justify-content-end">
+        <div>
+            </span> {% if user.is_authenticated %}
+            <form method="post" action={% url 'main:article-update' article.id %}>
+                {% csrf_token %} {%if is_favorite%}
+                <button class="btn btn-danger" type="submit">
+                    <span class="fa fa-heart"></span>
+              Remove from favorite
+            </button> {%else%}
+
+                <button class="btn btn-outline-danger" type="submit">
+                    <span class="fa fa-heart"></span>
+                    Add to favorite
+            </button> {% endif %}
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <br>
+            <img class="img-fluid" src="{{ article.url_to_image }}" alt="" style="width: 90%;">
+            <div class="mt-2">
+                <div>
+                    <span class="card-title">
+                                <strong>Author:</strong>
+                                {{article.author}}</span>
+
+                </div>
+                <div>
+                    <span>
+                                <strong>Published At:</strong>
+                               {{article.published_at}}</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-7 shadow-lg p-3 mb-5 bg-white rounded">
+            <h1 class="my-3">{{ article.title }}</h1>
+            <p class="lead mt-5">{{ article.content }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

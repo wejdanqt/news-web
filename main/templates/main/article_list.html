@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %} {% block title %} Home Page {% endblock %} {% load static %} {%block content %}
+
+
+<div class="row">
+    <!--ADD CLASSES HERE d-flex align-items-stretch-->
+    {% for article in object_list %}
+    <div class="col-lg-4 mb-3 d-flex align-items-stretch">
+        <div class="card">
+            <img src="{{ article.url_to_image }}" class="card-img-top" alt="Card Image">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <p class="card-text mb-4">{{ article.description }}</p>
+                <a href="{% url 'main:article-detail' article.id %}" class="btn btn-primary text-white mt-auto align-self-start">Read More</a>
+            </div>
+        </div>
+    </div>
+    {% empty %} {% if user.is_authenticated and request.GET.sub %}
+    <div class="alert alert-info" role="alert">
+        You have no favorites!
+    </div>
+
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        There is no news yet, but keep checking in :)
+    </div>
+    {% endif %} {% endfor %}
+</div>
+
+{% if page_obj %}
+<nav>
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="page={{ page_obj.previous_page_number }}">Previous</a >
+    </li>
+    {% endif %} {% for page_number in page_obj.paginator.page_range %}
+    <li
+      class="page-item {% if page_obj.number == page_number %} active  {% endif %}"
+    >
+      <a class="page-link" href="{% if request.GET.sub == 'favorites' %}?sub=favorites?page={{ page_number }} {% else %} ?page={{ page_number }} {% endif %}">{{ page_number }}</a>
+        </li>
+        {%endfor%} {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %} {% endblock content %}
