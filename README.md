@@ -36,7 +36,7 @@ You can now run the development server:
 ```sh
 $ python3 manage.py runserver
 ```
-**_NOTE:_**  The database is already loded by external API https://newsapi.org/ to `db.sqlite3` in case the database is empty please follow the following commands to re load it:
+**_NOTE:_**  The database is already loded by external API https://newsapi.org/ to `db.sqlite3` in case the database is empty please follow the following commands to reload it:
 
 ```sh
 python3 manage.py makemigrations main
