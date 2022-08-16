@@ -1,5 +1,5 @@
 # Introduction
----
+
 The Goal of this project is to view latest new and mark your favorites articles
 
 ## Features
@@ -42,5 +42,6 @@ $ python3 manage.py runserver
 python3 manage.py makemigrations main
 python3 manage.py makemigrations accounts
 python3 manage.py migrate
+python3 manage.py get_articles_command
 python3 manage.py runserver
 ```
