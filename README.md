@@ -24,7 +24,7 @@ $ virtualenv venv
 ```
 Activate the virtualenv for your project.
 ```sh
-$ source venv/bin/active
+$ source venv/bin/activate
 ```
 
 Install project dependencies:
