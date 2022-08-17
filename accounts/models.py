@@ -9,6 +9,18 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.core.exceptions import ValidationError
 from . import validators
 
+class CIEmailField(models.EmailField):
+    """
+    Override EmailField to convert emails to lowercase before saving.
+    """
+
+    def to_python(self, value):
+        """
+        Convert email to lowercase.
+        """
+        value = super(CIEmailField, self).to_python(value)
+        return value.lower()
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -41,7 +53,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'), unique=True)
+    email = CIEmailField(_('email address'), unique=True)
     national_id = models.CharField(max_length=10, validators=[
                                    validators.NationalIdValidator()])
     name = models.CharField(max_length=150)
